@@ -1,0 +1,50 @@
+name: Deploy bnc-site
+
+on:
+  push:
+    branches: ["main"]
+  workflow_dispatch: {}
+
+concurrency:
+  group: deploy-bnc-site
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      # Optional: if you have large build artifacts, add build steps before deploy.
+
+      - name: Start SSH agent and add key
+        uses: webfactory/ssh-agent@v0.9.0
+        with:
+          ssh-private-key: ${{ secrets.DEPLOY_SSH_KEY }}
+
+      - name: Add server to known_hosts
+        run: |
+          mkdir -p ~/.ssh
+          ssh-keyscan -H 159.223.224.43 >> ~/.ssh/known_hosts
+
+      - name: Upload repo to ~/bnc-site on server
+        run: |
+          rsync -az --delete \
+            --exclude ".git/" \
+            --exclude ".github/" \
+            -e "ssh -o StrictHostKeyChecking=yes" \
+            ./ ${{ secrets.DEPLOY_USER }}@159.223.224.43:~/bnc-site/
+
+      - name: Publish to /var/www/bnc-site (sudo)
+        run: |
+          ssh -o StrictHostKeyChecking=yes ${{ secrets.DEPLOY_USER }}@159.223.224.43 << 'EOF'
+            set -euo pipefail
+            sudo mkdir -p /var/www/bnc-site
+            sudo rsync -az --delete ~/bnc-site/ /var/www/bnc-site/
+            # If you run a web server, you can reload it here (optional):
+            # sudo systemctl reload nginx || true
+            # sudo systemctl reload apache2 || true
+          EOF
+

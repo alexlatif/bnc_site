@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Investor Relations - CEA Industries</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="data.js"></script>
+    <script src="mock-api.js"></script>
+    <script src="keys.js"></script>
+</head>
+<body class="min-h-screen flex flex-col bg-white">
+    <nav id="navigation"></nav>
+
+    <main class="flex-1">
+        <!-- Hero -->
+        <section class="bg-white border-b border-gray-200">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
+                <h1 class="text-4xl md:text-5xl font-medium text-gray-900 mb-6">Investor Relations</h1>
+                <p class="text-lg text-gray-600 max-w-3xl">
+                    Access comprehensive financial information, SEC filings, press releases, and investor presentations. CEA Industries is committed to transparent and timely communication with our shareholders.
+                </p>
+            </div>
+        </section>
+
+        <!-- Stock Quote Widget -->
+        <section class="bg-gray-50 border-b border-gray-200">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+                <div class="bg-white border border-gray-200 rounded-lg p-8">
+                    <div class="flex items-center justify-between flex-wrap gap-4 mb-6">
+                        <div>
+                            <div class="text-sm text-gray-600 mb-1">NASDAQ: BNC</div>
+                            <h2 class="text-2xl font-medium text-gray-900">CEA Industries Inc.</h2>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <svg class="h-5 w-5 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path>
+                            </svg>
+                            <span class="text-green-600 text-sm" id="stock-change">+4.35%</span>
+                        </div>
+                    </div>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
+                        <div>
+                            <div class="text-sm text-gray-600 mb-1">Last Price</div>
+                            <div class="text-xl font-medium text-gray-900" id="stock-price">$0.48</div>
+                        </div>
+                        <div>
+                            <div class="text-sm text-gray-600 mb-1">Day Range</div>
+                            <div class="text-sm text-gray-900" id="stock-range">$0.46 - $0.49</div>
+                        </div>
+                        <div>
+                            <div class="text-sm text-gray-600 mb-1">Volume</div>
+                            <div class="text-sm text-gray-900" id="stock-volume">1,245,600</div>
+                        </div>
+                        <div>
+                            <div class="text-sm text-gray-600 mb-1">Market Cap</div>
+                            <div class="text-sm text-gray-900" id="stock-marketcap">$8.2M</div>
+                        </div>
+                    </div>
+
+                    <div class="mt-6 pt-6 border-t border-gray-200">
+                        <p class="text-xs text-gray-500">
+                            Stock quote data delayed by 15 minutes. For real-time quotes, please visit your broker or financial data provider.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SEC Filings -->
+        <section class="bg-white border-b border-gray-200">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+                <div class="flex items-center justify-between mb-8">
+                    <h2 class="text-3xl font-medium text-gray-900">SEC Filings</h2>
+                    <a href="https://www.sec.gov/cgi-bin/browse-edgar?action=getcompany&CIK=0001482541&owner=include&count=40" target="_blank" rel="noopener noreferrer" class="text-sm text-gray-600 hover:text-gray-900 flex items-center">
+                        View all on SEC.gov
+                        <svg class="ml-1 h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path>
+                        </svg>
+                    </a>
+                </div>
+
+                <div class="space-y-4" id="filings-list">
+                    <!-- Filings will be populated by JavaScript -->
+                </div>
+            </div>
+        </section>
+
+        <!-- Press Releases -->
+        <section class="bg-gray-50 border-b border-gray-200">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+                <h2 class="text-3xl font-medium text-gray-900 mb-8">Press Releases</h2>
+
+                <div class="space-y-4" id="press-releases">
+                    <!-- Press releases will be populated by JavaScript -->
+                </div>
+            </div>
+        </section>
+
+        <!-- Presentations
+        <section class="bg-white border-b border-gray-200">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+                <h2 class="text-3xl font-medium text-gray-900 mb-8">Investor Presentations</h2>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6" id="presentations-grid">
+                </div>
+            </div>
+        </section> -->
+
+        <!-- IR Contact -->
+        <section class="bg-white">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <div>
+                        <h2 class="text-3xl font-medium text-gray-900 mb-6">Investor Relations Contact</h2>
+                        <div class="space-y-4">
+                            <div class="flex items-start">
+                                <svg class="h-5 w-5 text-gray-600 mr-3 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+                                </svg>
+                                <div>
+                                    <div class="text-sm text-gray-600 mb-1">Email</div>
+                                    <a href="mailto:ir@ceaindustries.com" class="text-gray-900 hover:underline">
+                                        ir@ceaindustries.com
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="flex items-start">
+                                <svg class="h-5 w-5 text-gray-600 mr-3 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+                                </svg>
+                                <div>
+                                    <div class="text-sm text-gray-600 mb-1">Upcoming Events</div>
+                                    <div class="text-sm text-gray-900">Q4 2025 Earnings Call - TBA</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-gray-50 border border-gray-200 rounded-lg p-6">
+                        <h3 class="text-xl font-medium text-gray-900 mb-4">Email Alerts</h3>
+                        <p class="text-sm text-gray-600 mb-4">
+                            Subscribe to receive press releases, SEC filings, and other investor updates.
+                        </p>
+                        <div class="flex gap-2">
+                            <input
+                                type="email"
+                                id="newsletter-email"
+                                placeholder="your@email.com"
+                                class="flex-1 px-4 py-2 border border-gray-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-gray-900"
+                            >
+                            <button class="btn-primary" id="newsletter-button">Subscribe</button>
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer id="footer"></footer>
+
+    <script>
+        // Load navigation and footer
+        document.getElementById('navigation').innerHTML = window.navigationHTML;
+        document.getElementById('footer').innerHTML = window.footerHTML;
+        
+        // Set active nav item
+        const currentPage = window.location.pathname.split('/').pop();
+        document.querySelectorAll('nav a').forEach(link => {
+            if (link.getAttribute('href') === currentPage) {
+                link.classList.add('text-gray-900');
+            } else {
+                link.classList.add('text-gray-600', 'hover:text-gray-900');
+            }
+        });
+    </script>
+
+    <script src="sec-filings.js"></script>
+    <script src="press-release.js"></script>
+    <script src="stock-quote.js"></script>
+    <script src="newsletter-submit.js"></script>
+
+</body>
+</html>

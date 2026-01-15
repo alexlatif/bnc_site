@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BNB Treasury Dashboard - CEA Industries</title>
+    <link rel="stylesheet" href="styles.css">
+
+    <!-- Tailwind + Charts -->
+    <script>
+        tailwind = {
+          config: {
+            safelist: [
+              "text-gray-900", "hover:text-gray-900",
+              "text-gray-600", "hover:text-gray-600",
+              "font-medium",
+              "px-4", "py-2",
+              "transition", "flex", "gap-4",
+              "inline-flex", "items-center"
+            ]
+          }
+        }
+      </script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <!-- Core Data -->
+    <script src="data.js"></script>
+    <script src="mock-api.js"></script>
+
+    <!-- NEW Dashboard Modules -->
+    <script src="keys.js"></script>
+    <script src="inputs.js"></script>
+    <script src="dashboard.js"></script>
+
+</head>
+<body class="min-h-screen flex flex-col bg-white">
+    <nav id="navigation"></nav>
+
+    <main class="flex-1">
+        <!-- Hero -->
+        <section class="bg-white border-b border-gray-200">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+                <h1 class="text-4xl font-medium text-gray-900 mb-4">BNB Treasury Dashboard</h1>
+                <p class="text-gray-600 max-w-3xl">
+                   Metrics and performance data for CEA Industries' digital asset holdings.  
+                </p>
+            </div>
+        </section>
+
+        <!-- Current Metrics -->
+        <section class="bg-gray-50 border-b border-gray-200">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+                <h2 class="text-3xl font-medium text-gray-900 mb-8">Current Metrics</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" id="metrics-grid">
+                    <!-- Filled by top-metrics.js -->
+                </div>
+            </div>
+        </section>
+
+        <!-- Performance Charts -->
+        <section class="bg-white border-b border-gray-200">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+                <h2 class="text-3xl font-medium text-gray-900 mb-8">Performance Charts</h2>
+
+                <!-- Responsive 2-column layout -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+
+                    <!-- BNB Chart -->
+                    <div class="bg-gray-50 border border-gray-200 rounded-lg p-6">
+                        <h3 class="text-xl font-medium text-gray-900 mb-6">BNB Price (Last 30 Days)</h3>
+                        <div class="chart-container">
+                            <canvas id="bnbChart"></canvas>
+                        </div>
+                    </div>
+
+                    <!-- BNC Chart -->
+                    <div class="bg-gray-50 border border-gray-200 rounded-lg p-6">
+                        <h3 class="text-xl font-medium text-gray-900 mb-6">BNC Price (Last 30 Days)</h3>
+                        <div class="chart-container">
+                            <canvas id="bncChart"></canvas>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+
+        <!-- Additional Metrics -->
+        <section class="bg-gray-50">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+                <h2 class="text-3xl font-medium text-gray-900 mb-8">Additional Metrics</h2>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="bg-white border border-gray-200 rounded-lg p-6">
+                        <h3 class="text-xl font-medium text-gray-900 mb-4">Weekly Summary</h3>
+                        <div class="space-y-3" id="weekly-summary">
+                            <!-- Filled by additional-metrics.js -->
+                        </div>
+                    </div>
+
+                    <div class="bg-white border border-gray-200 rounded-lg p-6">
+                        <h3 class="text-xl font-medium text-gray-900 mb-4">Airdrop Metrics</h3>
+                        <div class="space-y-3" id="valuation-metrics">
+                            <!-- Filled by additional-metrics.js -->
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mt-6 bg-blue-50 border border-blue-200 rounded-lg p-4 text-sm text-blue-900 space-y-3">
+
+                    <p><strong>Footnotes</strong></p>
+                
+                    <p id="bnb-last-updated"></p>
+                
+                    <p>1. <strong>BNC Stock Price.</strong> Reflects the trading price for BNC common stock per share as reported by Nasdaq. Price and volume data are sourced from Nasdaq’s website and may be delayed. Intraday market movement and fluctuations may not be reflected and stock may differ from prices displayed on brokerage platforms or subsequent market activity. Prices are shown in U.S. dollars and rounded to the nearest cent.</p>
+                
+                    <p>2. <strong>Total BNB Holdings.</strong> Represents the most recently publicly announced number of BNB tokens held; BNB holdings are only updated periodically and not updated in real time.</p>
+                
+                    <p>3. <strong>Estimated Holdings Value.</strong> Calculated as Total BNB Holdings multiplied by the BNB Price based upon data displayed. USD conversions use the reference price indicated under “BNB Price.” The Holdings Value is a point-in-time estimate and may not reflect proceeds realizable upon sale, which could be affected by liquidity, execution costs, slippage, and fees. Figures are presented on a gross basis and exclude custody, trading, or other transaction costs.</p>
+                
+                    <p>4. <strong>BNB Price.</strong> Represents the trading price of BNB in U.S. dollars as quoted by CoinMarketCap and may be delayed. The reported price may differ from prices available on specific trading venues due to liquidity, spreads, and market differences. Prices are rounded to the nearest cent.</p>
+                
+                    <p>5. <strong>Average Cost Basis.</strong> Reflects the treasury’s estimated total acquisition cost, based on the most recent publicly reported figure, divided by Total BNB Holdings. Average Cost Basis is only updated periodically based on previously publicly released information and may not accurately reflect interim changes to such figure. The figure is based on internal accounting records and may be updated to reflect post-trade adjustments, corporate actions, or reconciliations. The methodology is intended for illustrative purposes only and may differ from GAAP/IFRS accounting treatments.</p>
+                
+                    <p>6. <strong>Est. Change in Value of BNB Holdings.</strong> Represents an estimate of the difference between Holdings Value and the aggregate cost basis of Total BNB Holdings, stated in U.S. dollars, along with the percentage change versus cost basis. This metric is unrealized and does not reflect taxes, fees, spreads, or liquidation impacts. Performance is sensitive to market volatility; actual realized results may differ materially from unrealized amounts.</p>
+                
+                    <p>7. <strong>Average Daily Volume (BNC).</strong> Reflects the average daily volume of BNC shares traded on Nasdaq during the most recent 30 trading days, unless otherwise specified. Data is sourced from Nasdaq’s website and may be delayed and may not include off-market transfers not captured by primary reporting venues. Volume figures are for informational purposes and may not be reflective of current or future volume or liquidity of shares of BNC.</p>
+                
+                    <p>8. <strong>mNAV.</strong> Calculated as an estimate of the Company’s non-diluted common stock market capitalization value, as provided in the Company’s most recent public disclosures, divided by the Est. Holdings Value, expressed as a multiple (e.g., 0.45x). The calculation uses the estimated BNC market capitalization, based upon BNC Price as provided by Nasdaq (data may be delayed). mNAV does not take into account or include the Company's indebtedness or non-treasury assets or liabilities. As such, it is not equivalent to "net asset value" or "NAV" or any similar metric in the traditional financial context or to the NAV used by other companies, and it is not a measure of either the net asset value of the Company or the value of the BNB held by the Company net of indebtedness and other obligations. Estimates may not include non-treasury assets and liabilities, intangible assets, and other factors. Information provided is an estimate for illustrative purposes. Investors should consult the Company’s financial statements, risk factors and all other disclosures contained in Quarterly Reports on Form 10-Q and Annual Reports on Form 10-K filed with the SEC prior to making any investment decision.</p>
+                
+                    <p>9. <strong>[BNB from Airdrops].</strong> Represents the most recent publicly reported data for the estimated cumulative amount of BNB provided following the conversion of ‘airdrop’ units received via network distributions, protocol incentives, or similar on-chain events credited to treasury wallets.</p>
+                
+                    <p>10. <strong>Weekly Change Metrics.</strong> Where weekly percentage changes are presented (e.g., Weekly BNB Change, Weekly BNC Change), changes are measured between the most recent trading day’s closing price and the closing trading price one week prior, based on reported data from Nasdaq and CoinMarketCap, which may be delayed. Past performance is not indicative of future results.</p>
+                
+                    <p>11. <strong>NAV per Share.</strong> Represents an estimate of the Estimated Holdings Value divided by the Company’s most recent public disclosure of total shares of BNC common stock outstanding. Estimates may not include non-treasury assets and liabilities, intangible assets, and other factors. Information provided is an estimate for illustrative purposes. Investors should consult the Company’s financial statements, risk factors and all other disclosures contained in Quarterly Reports on Form 10-Q and Annual Reports on Form 10-K filed with the SEC prior to making any investment decision.</p>
+                
+                    <hr class="border-blue-200">
+                
+                    <p><strong>Important Information & Legal Disclaimers.</strong></p>
+                
+                    <p>Information provided reflects estimates for illustrative purposes only. Investors should consult the Company’s financial statements, risk factors and all other disclosures contained in Quarterly Reports on Form 10-Q and Annual Reports on Form 10-K filed with the SEC prior to making any investment decision. Digital assets are volatile and may involve significant risk, including loss of principal. Values can fluctuate materially over short periods. The presentation of metrics does not constitute investment advice, an offer, or a solicitation to buy or sell any security or digital asset. Figures and metrics provided may not be comparable to similarly titled measures used by other companies. These measures should be considered supplemental to and not a substitute for, financial information prepared in accordance with applicable accounting standards.</p>
+                
+                    <p>Nothing contained herein constitutes tax, legal, insurance, or investment advice, or the recommendation of or an offer to sell, or the solicitation of an offer to buy or invest, in any security. Historic market trends are not reliable indicators of actual future market behavior or future performance of any particular investment, which may differ materially and should not be relied upon as such. All investments carry a certain degree of risk and there is no assurance that any investment will provide positive performance over any time period. Different time periods and market conditions may result in significantly different outcomes. The instruments included in this Dashboard are not FDIC-insured, may lose value, and are not guaranteed by any bank. Investors and other viewers of this dashboard should not place undue reliance on the information provided and are encouraged to carefully review the risk factors and other disclosures contained in the Company’s filings with the U.S. Securities and Exchange Commission before making any investment or financial decisions.</p>
+                
+                    <p><strong>Data Sources and Timing.</strong> Unless otherwise stated, all data is based on the Company’s most recent publicly reported figures. Market data is obtained from third-party providers and may be subject to delays or reporting errors; and the Company cannot guarantee the accuracy, completeness, availability, and timeliness of such data. Discrepancies may occur due to network latency, pending transactions, data provider methodologies or other factors.</p>
+                
+                    <p><strong>Rounding and Presentation.</strong> Figures may be rounded for display purposes, and totals may not sum due to rounding. Percentage changes are calculated from unrounded figures. Historical values may be restated to reflect methodology refinements or corrections. All currency is in U.S. dollars.</p>
+                
+                    <p><strong>Methodology and Limitations.</strong> The metrics presented are intended for supplemental purposes only and should not be viewed as a substitute to the Company’s financial statements and other information disclosed in the Company’s SEC filings. Figures and metrics are estimates and may rely on assumptions, estimates, and internal methodologies that are subject to change. Calculations may exclude certain assets, liabilities, or contingent exposures. Methodological details may be updated without notice.</p>
+                
+                    <p><strong>No Assurance; Forward-Looking Considerations.</strong> While metrics reflect estimated historical and point-in-time information, they may be influenced by forward-looking factors such as future market conditions, price fluctuations, and operational decisions. No assurance is provided that current metrics will be maintained or realized in the future.</p>
+                
+                    <p>The Company reserves all rights to revise definitions, inputs, and data sources and shall have no obligations to maintain or update information in the future.</p>
+                
+                    <p>All items on this dashboard are provided for informational and illustrative purposes only and should not be relied upon or used as the basis for any investment decision. Nothing herein constitutes investment, legal, accounting, or tax advice, or a recommendation or solicitation to buy or sell any security or digital asset.</p>
+                
+                </div>
+                
+            </div>
+        </section>
+    </main>
+
+    <footer id="footer"></footer>
+
+    <script>
+        // Inject nav + footer
+        document.getElementById("navigation").innerHTML = window.navigationHTML;
+        document.getElementById("footer").innerHTML = window.footerHTML;
+
+        // Highlight active nav link
+        const currentPage = window.location.pathname.split("/").pop();
+        document.querySelectorAll("nav a").forEach(link => {
+            if (link.getAttribute("href") === currentPage) {
+                link.classList.add("text-gray-900");
+            } else {
+                link.classList.add("text-gray-600", "hover:text-gray-900");
+            }
+        });
+
+        function formatPRDateET() {
+            // Convert “now” to Eastern Time
+            const now = new Date();
+            const etString = now.toLocaleString("en-US", {
+                timeZone: "America/New_York",
+                month: "long",
+                day: "numeric",
+                year: "numeric",
+                hour: "numeric",
+                minute: "2-digit",
+                hour12: true,
+            });
+
+            return `* The Company’s BNB Holdings data last updated: ${etString} ET`;
+        }
+
+        document.addEventListener("DOMContentLoaded", function () {
+            const el = document.getElementById("bnb-last-updated");
+            if (el) {
+                el.textContent = formatPRDateET(new Date());
+            }
+        });
+    </script>
+</body>
+</html>

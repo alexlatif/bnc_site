@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our Businesses - CEA Industries</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="data.js"></script>
+    <script src="keys.js"></script>
+    <script src="inputs.js"></script>
+    <script src="mock-api.js"></script>
+</head>
+<body class="min-h-screen flex flex-col bg-white">
+    <nav id="navigation"></nav>
+
+    <main class="flex-1">
+        <!-- Hero -->
+        <section class="bg-white border-b border-gray-200">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
+                <h1 class="text-4xl md:text-5xl font-medium text-gray-900 mb-6">Our Businesses</h1>
+                <p class="text-lg text-gray-600 max-w-3xl">
+                    CEA Industries operates through a focused digital asset treasury strategy and legacy business operations, all aimed at creating long-term shareholder value.
+                </p>
+            </div>
+        </section>
+
+        <!-- BNB Treasury -->
+        <section class="bg-gray-50 border-b border-gray-200">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                    <div>
+                        <div class="inline-flex items-center justify-center w-16 h-16 bg-gray-900 text-white rounded-lg mb-6">
+                            <svg class="h-8 w-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path>
+                            </svg>
+                        </div>
+                        <h2 class="text-3xl font-medium text-gray-900 mb-4">BNB Treasury</h2>
+                        <p class="text-gray-600 mb-6">
+                            Our core strategic focus is the disciplined acquisition and management of BNB digital assets. Through our treasury operations, CEA Industries provides shareholders with indirect exposure to the BNB ecosystem, combining the benefits of digital asset holdings with the governance and transparency of a public company structure.
+                        </p>
+                        <p class="text-gray-600 mb-6">
+                            The BNB Treasury strategy is built on transparent reporting, disciplined capital allocation, and a long-term value creation philosophy. All holdings, performance metrics, and key statistics are available in real-time through our comprehensive dashboard.
+                        </p>
+                        <a href="dashboard.html" class="btn-primary">
+                            View Dashboard
+                            <svg class="ml-2 h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                            </svg>
+                        </a>
+                    </div>
+                    <div class="bg-white border border-gray-200 rounded-lg p-8">
+                        <h3 class="text-xl font-medium text-gray-900 mb-6">Key Metrics</h3>
+                        <div class="space-y-4">
+                            <div class="flex justify-between items-center pb-4 border-b border-gray-200">
+                                <span class="text-sm text-gray-600">Total BNB Holdings</span>
+                                <span class="text-gray-900" id="bnb-holdings">Loading...</span>
+                            </div>
+                            <div class="flex justify-between items-center pb-4 border-b border-gray-200">
+                                <span class="text-sm text-gray-600">Average Cost Basis</span>
+                                <span class="text-gray-900" id="avg-cost">Loading...</span>
+                            </div>
+                            <div class="flex justify-between items-center pb-4 border-b border-gray-200">
+                                <span class="text-sm text-gray-600">Current BNB Price</span>
+                                <span class="text-gray-900" id="bnb-price">Loading...</span>
+                            </div>
+                            <div class="flex justify-between items-center">
+                                <span class="text-sm text-gray-600">Total Value</span>
+                                <span class="text-gray-900" id="total-value">Loading...</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Legacy Businesses -->
+        <section class="bg-white border-b border-gray-200">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+                <h2 class="text-3xl font-medium text-gray-900 mb-12">Legacy Business Units</h2>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <!-- Fat Panda -->
+                    <div class="border border-gray-200 rounded-lg p-8">
+                        <div class="flex items-start justify-between mb-4">
+                            <h3 class="text-xl font-medium text-gray-900">Fat Panda</h3>
+                            <a href="https://fatpanda.ca" target="_blank" rel="noopener noreferrer" class="text-gray-600 hover:text-gray-900">
+                                <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path>
+                                </svg>
+                            </a>
+                        </div>
+                        <p class="text-sm text-gray-600 mb-6">
+                            Fat Panda is a legacy business unit with an established market presence and operational history. As part of our strategic portfolio evaluation, we continue to assess the long-term alignment of Fat Panda with our core treasury strategy and shareholder value objectives.
+                        </p>
+                        <a href="https://fatpanda.ca" target="_blank" rel="noopener noreferrer" class="btn-secondary w-full">
+                            Visit Fat Panda
+                            <svg class="ml-2 h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path>
+                            </svg>
+                        </a>
+                    </div>
+
+                    <!-- Surna -->
+                    <div class="border border-gray-200 rounded-lg p-8">
+                        <div class="flex items-start justify-between mb-4">
+                            <h3 class="text-xl font-medium text-gray-900">Surna Cultivation Technologies</h3>
+                            <a href="https://surna.com" target="_blank" rel="noopener noreferrer" class="text-gray-600 hover:text-gray-900">
+                                <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path>
+                                </svg>
+                            </a>
+                        </div>
+                        <p class="text-sm text-gray-600 mb-6">
+                            Surna Cultivation Technologies provides specialized solutions for controlled environment agriculture. As with all our business units, we continuously evaluate Surna's strategic fit and contribution to overall shareholder value as our company evolves.
+                        </p>
+                        <a href="https://surna.com" target="_blank" rel="noopener noreferrer" class="btn-secondary w-full">
+                            Visit Surna
+                            <svg class="ml-2 h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Strategic Evaluation -->
+        <section class="bg-gray-50">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+                <div class="max-w-3xl mx-auto text-center">
+                    <h2 class="text-3xl font-medium text-gray-900 mb-4">Strategic Portfolio Management</h2>
+                    <p class="text-gray-600">
+                        CEA Industries maintains an active approach to portfolio management, regularly evaluating the strategic alignment and value contribution of all business units. Our primary focus remains on our BNB Treasury operations, while we assess opportunities to optimize our overall business structure for maximum shareholder value.
+                    </p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer id="footer"></footer>
+
+    <script>
+        // Load navigation and footer
+        document.getElementById('navigation').innerHTML = window.navigationHTML;
+        document.getElementById('footer').innerHTML = window.footerHTML;
+        
+        // Set active nav item
+        const currentPage = window.location.pathname.split('/').pop();
+        document.querySelectorAll('nav a').forEach(link => {
+            if (link.getAttribute('href') === currentPage) {
+                link.classList.add('text-gray-900');
+            } else {
+                link.classList.add('text-gray-600', 'hover:text-gray-900');
+            }
+        });
+
+        loadAllInputs().then(() => {
+            const h = CONFIG.BNB_HOLDINGS;
+            const price = MARKET.BNB_PRICE;
+            const cost = CONFIG.AVG_COST;
+
+            document.getElementById("bnb-holdings").textContent =
+                h.toLocaleString() + " BNB";
+
+            document.getElementById("avg-cost").textContent =
+                "$" + cost.toFixed(2);
+
+            document.getElementById("bnb-price").textContent =
+                "$" + price.toFixed(2);
+
+            document.getElementById("total-value").textContent =
+                "$" + (h * price).toLocaleString();
+        });
+
+    </script>
+    <script src="bnb-price.js"></script>
+
+</body>
+</html>

@@ -7,6 +7,12 @@
   
     const releases = [
       {
+        date: "Feb 4, 2026",
+        title: "CEA Industries Requests That 10X Capital and YZi Labs Terminate Their Secret Side Agreement",
+        source: "GlobeNewswire",
+        link: "https://www.globenewswire.com/news-release/2026/2/4/3232349/0/en/CEA-Industries-Requests-That-10X-Capital-and-YZi-Labs-Terminate-Their-Secret-Side-Agreement.html"
+      },
+      {
         date: "Nov 10, 2025",
         title: "CEA Industries ($BNC) to Participate at the 2025 Cantor Crypto & AI/Energy Infrastructure Conference November 11-12, 2025",
         source: "GlobeNewswire",

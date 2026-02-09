@@ -7,10 +7,28 @@
   
     const releases = [
       {
+        date: "Feb 9, 2026",
+        title: "CEA Industries Appoints Accounting and Compliance Expert Glenn W. Tyranski to Its Board of Directors",
+        source: "GlobeNewswire",
+        link: "https://www.globenewswire.com/news-release/2026/02/09/3234892/0/en/CEA-Industries-Appoints-Accounting-and-Compliance-Expert-Glenn-W-Tyranski-to-Its-Board-of-Directors.html"
+      },
+      {
+        date: "Feb 6, 2026",
+        title: "YZi Labs Calls on CEA Industries to Ensure Stockholders Can Exercise Written Consent Rights",
+        source: "GlobeNewswire",
+        link: "https://www.globenewswire.com/news-release/2026/02/06/3234038/0/en/YZi-Labs-Calls-on-CEA-Industries-to-Ensure-Stockholders-Can-Exercise-Written-Consent-Rights.html"
+      },
+      {
+        date: "Feb 4, 2026",
+        title: "YZi Labs Responds to CEA Industries' February 4, 2026 Press Release",
+        source: "GlobeNewswire",
+        link: "https://www.globenewswire.com/news-release/2026/02/04/3232598/0/en/YZi-Labs-Responds-to-CEA-Industries-February-4-2026-Press-Release.html"
+      },
+      {
         date: "Feb 4, 2026",
         title: "CEA Industries Requests That 10X Capital and YZi Labs Terminate Their Secret Side Agreement",
         source: "GlobeNewswire",
-        link: "https://www.globenewswire.com/news-release/2026/2/4/3232349/0/en/CEA-Industries-Requests-That-10X-Capital-and-YZi-Labs-Terminate-Their-Secret-Side-Agreement.html"
+        link: "https://www.globenewswire.com/news-release/2026/02/04/3232349/0/en/CEA-Industries-Requests-That-10X-Capital-and-YZi-Labs-Terminate-Their-Secret-Side-Agreement.html"
       },
       {
         date: "Nov 10, 2025",

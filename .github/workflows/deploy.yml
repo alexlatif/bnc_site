@@ -1,8 +1,11 @@
 name: Deploy bnc-site
 
 on:
+  pull_request:
+    paths: ['.github/**']
   push:
     branches: ["main"]
+    paths-ignore: ['.github/**']
   workflow_dispatch: {}
 
 concurrency:
@@ -10,12 +13,29 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
+  runner-smoke:
+    runs-on: ci
+    timeout-minutes: 5
+    permissions:
+      contents: read
+    steps:
+      - name: Verify the cluster runner tools
+        env:
+          RUNNER_ENVIRONMENT: ${{ runner.environment }}
+        run: |
+          test "$RUNNER_ENVIRONMENT" = self-hosted
+          node --version
+          python3 --version
+          ssh -V
+  # Workflow-only PRs prove routing without deploying an old application.
   deploy:
-    runs-on: ubuntu-latest
+    if: github.event_name != 'pull_request'
+    needs: runner-smoke
+    runs-on: ci
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
 
       - name: Install SSH key
         shell: bash
@@ -30,11 +50,19 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          rsync -az --delete \
-            --exclude ".git/" \
-            --exclude ".github/" \
-            -e "ssh -i ~/.ssh/id_ed25519 -o StrictHostKeyChecking=yes" \
-            ./ ${{ secrets.DEPLOY_USER }}@159.223.224.43:~/bnc-site/
+          # The cluster image provides OpenSSH and tar. Keep rsync's exact
+          # replacement semantics on the existing server, where it is installed.
+          tar --exclude=.git --exclude=.github -czf "$RUNNER_TEMP/bnc-site.tar.gz" .
+          scp -i ~/.ssh/id_ed25519 -o StrictHostKeyChecking=yes \
+            "$RUNNER_TEMP/bnc-site.tar.gz" ${{ secrets.DEPLOY_USER }}@159.223.224.43:~/bnc-site-incoming.tar.gz
+          ssh -i ~/.ssh/id_ed25519 -o StrictHostKeyChecking=yes ${{ secrets.DEPLOY_USER }}@159.223.224.43 'bash -se' <<'EOF'
+            set -euo pipefail
+            staging=$(mktemp -d)
+            trap 'rm -rf "$staging"; rm -f "$HOME/bnc-site-incoming.tar.gz"' EXIT
+            tar -xzf "$HOME/bnc-site-incoming.tar.gz" -C "$staging"
+            mkdir -p "$HOME/bnc-site"
+            rsync -a --delete --exclude=.git/ --exclude=.github/ "$staging/" "$HOME/bnc-site/"
+          EOF
 
       - name: Publish to /var/www/bnc-site (sudo)
         shell: bash
